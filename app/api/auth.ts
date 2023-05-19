@@ -3,6 +3,11 @@ import { getServerSideConfig } from "../config/server";
 import md5 from "spark-md5";
 import { ACCESS_CODE_PREFIX } from "../constant";
 
+//web3Payment------xiaoyu1998
+import { recoverAddress, checkExpiration, ONE_DAY } from "../web3/utils/crypto";
+const cacheCheckExpiration = new Map<string, [number, boolean]>();
+//web3Payment------xiaoyu1998
+
 function getIP(req: NextRequest) {
   let ip = req.ip ?? req.headers.get("x-real-ip");
   const forwardedFor = req.headers.get("x-forwarded-for");
@@ -27,6 +32,9 @@ function parseApiKey(bearToken: string) {
 export function auth(req: NextRequest) {
   const authToken = req.headers.get("Authorization") ?? "";
 
+  //web3Payment------xiaoyu1998
+  const ethAddress = req.headers.get("ethAddress");
+
   // check if it is openai api key or user token
   const { accessCode, apiKey: token } = parseApiKey(authToken);
 
@@ -39,12 +47,40 @@ export function auth(req: NextRequest) {
   console.log("[User IP] ", getIP(req));
   console.log("[Time] ", new Date().toLocaleString());
 
-  if (serverConfig.needCode && !serverConfig.codes.has(hashedCode) && !token) {
+  if (
+    serverConfig.needCode &&
+    !serverConfig.codes.has(hashedCode) &&
+    !token &&
+    !ethAddress
+  ) {
+    //web3Payment------xiaoyu1998
     return {
       error: true,
       msg: !accessCode ? "empty access code" : "wrong access code",
     };
   }
+
+  ////web3Payment------xiaoyu1998
+  if (ethAddress) {
+    var Expired;
+    const lastCheck = cacheCheckExpiration.get(ethAddress);
+    const now = Date.now();
+    if (lastCheck == undefined || lastCheck[0] + ONE_DAY > now) {
+      Expired = await checkExpiration(ethAddress, serverConfig.servideId);
+      if (Expired) {
+        cacheCheckExpiration.set(ethAddress, [now, Expired]);
+      }
+    } else {
+      Expired = lastCheck[1];
+    }
+    if (Expired) {
+      return {
+        error: true,
+        msg: "the web3 payment has been expired",
+      };
+    }
+  }
+  //web3Payment------xiaoyu1998
 
   // if user does not provide an api key, inject system api key
   if (!token) {

@@ -13,11 +13,18 @@ export interface AccessControlStore {
   hideUserApiKey: boolean;
   openaiUrl: string;
 
+  //web3Payment------xiaoyu1998
+  enabledWeb3Payment: boolean;
+
   updateToken: (_: string) => void;
   updateCode: (_: string) => void;
   enabledAccessControl: () => boolean;
   isAuthorized: () => boolean;
   fetch: () => void;
+
+  //web3Payment------xiaoyu1998
+  updateEthAddress: (_: string) => void;
+  isWeb3Payment: () => boolean;
 }
 
 let fetchState = 0; // 0 not fetch, 1 fetching, 2 done
@@ -36,6 +43,13 @@ export const useAccessStore = create<AccessControlStore>()(
 
         return get().needCode;
       },
+      enabledWeb3() {
+        get().fetch();
+        return get().isWeb3Payment;
+      },
+      updateEthAddress(ethAddress: string) {
+        set((state) => ({ ethAddress }));
+      },
       updateCode(code: string) {
         set(() => ({ accessCode: code }));
       },
@@ -47,7 +61,10 @@ export const useAccessStore = create<AccessControlStore>()(
 
         // has token or has code or disabled access control
         return (
-          !!get().token || !!get().accessCode || !get().enabledAccessControl()
+          !!get().token ||
+          !!get().accessCode ||
+          !get().enabledAccessControl() ||
+          enabledWeb3() //web3Payment------xiaoyu1998
         );
       },
       fetch() {

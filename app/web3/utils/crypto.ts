@@ -20,7 +20,7 @@ export function recoverAddress(message: string, signature: string) {
 }
 
 export async function checkExpiration(ethAddress: string, serviceId: string) {
-  const provider = getDefaultProvider(URL_ETHAPI);
+  const provider = getDefaultProvider(URL_ETH);
   const aiways = new Contract(AIWAIYS, AIWAYS_ABI, provider);
   return await aiways.checkExpiration(ethAddress, parseInt(serviceId, 16));
 }
