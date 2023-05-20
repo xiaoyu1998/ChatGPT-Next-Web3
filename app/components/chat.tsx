@@ -20,6 +20,7 @@ import DarkIcon from "../icons/dark.svg";
 import AutoIcon from "../icons/auto.svg";
 import BottomIcon from "../icons/bottom.svg";
 import StopIcon from "../icons/pause.svg";
+import LeftIcon from "../icons/left.svg";
 
 import {
   ChatMessage,
@@ -633,17 +634,6 @@ export function Chat() {
     <div className={styles.chat} key={session.id}>
       <div className="window-header">
         <div className="window-header-title">
-          <div
-            className={`window-header-main-title " ${styles["chat-body-title"]}`}
-            onClickCapture={renameSession}
-          >
-            {!session.topic ? DEFAULT_TOPIC : session.topic}
-          </div>
-          <div className="window-header-sub-title">
-            {Locale.Chat.SubTitle(session.messages.length)}
-          </div>
-        </div>
-        <div className="window-actions">
           <div className={"window-action-button" + " " + styles.mobile}>
             <IconButton
               icon={<ReturnIcon />}
@@ -652,26 +642,8 @@ export function Chat() {
               onClick={() => navigate(Path.Home)}
             />
           </div>
-          <div className="window-action-button">
-            <IconButton
-              icon={<RenameIcon />}
-              bordered
-              onClick={renameSession}
-            />
-          </div>
-          <div className="window-action-button">
-            <IconButton
-              icon={<ExportIcon />}
-              bordered
-              title={Locale.Chat.Actions.Export}
-              onClick={() => {
-                exportMessages(
-                  session.messages.filter((msg) => !msg.isError),
-                  session.topic,
-                );
-              }}
-            />
-          </div>
+        </div>
+        <div className="window-actions">
           {!isMobileScreen && (
             <div className="window-action-button">
               <IconButton
