@@ -7,11 +7,11 @@ OPENAI_API_KEY=<your api key here>
 ENABLE_WEB3_PAYMENT=1
 ```
 
-and you need to enable web3 payment:
+And you need to enable web3 payment service:
 ```
 ENABLE_WEB3_PAYMENT=1
 SERVICE_ID=<your service id in aiways>
-PAYMENT_PACKAGE_IDS=<your package id for you service>
+PAYMENT_PACKAGE_IDS=<your package ids for your service>
 URL_ETH=<ethereum endpoint url>
 AIWAIYS=<aiways contract address>
 ```
