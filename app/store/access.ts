@@ -24,7 +24,7 @@ export interface AccessControlStore {
 
   //web3Payment------xiaoyu1998
   updateEthAddress: (_: string) => void;
-  isWeb3Payment: () => boolean;
+  enabledWeb3Payment: () => boolean;
 }
 
 let fetchState = 0; // 0 not fetch, 1 fetching, 2 done
@@ -43,9 +43,9 @@ export const useAccessStore = create<AccessControlStore>()(
 
         return get().needCode;
       },
-      enabledWeb3() {
+      enabledWeb3Payment() {
         get().fetch();
-        return get().isWeb3Payment;
+        return get().enabledWeb3Payment;
       },
       updateEthAddress(ethAddress: string) {
         set((state) => ({ ethAddress }));
@@ -64,7 +64,7 @@ export const useAccessStore = create<AccessControlStore>()(
           !!get().token ||
           !!get().accessCode ||
           !get().enabledAccessControl() ||
-          enabledWeb3() //web3Payment------xiaoyu1998
+          !get().enabledWeb3Payment() //web3Payment------xiaoyu1998
         );
       },
       fetch() {

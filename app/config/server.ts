@@ -34,6 +34,8 @@ export const getServerSideConfig = () => {
     );
   }
 
+  console.log(process.env);
+
   return {
     apiKey: process.env.OPENAI_API_KEY,
     code: process.env.CODE,
@@ -43,8 +45,8 @@ export const getServerSideConfig = () => {
     isVercel: !!process.env.VERCEL,
     hideUserApiKey: !!process.env.HIDE_USER_API_KEY,
     enableGPT4: !process.env.DISABLE_GPT4,
-    enableWeb3Payment: process.env.ENABLE_WEB3_PAYMENT,
-    paymentPackages: PAYMENT_PACKAGE_IDS,
+    enableWeb3Payment: process.env.ENABLE_WEB3_PAYMENT == 1,
+    paymentPackages: process.env.PAYMENT_PACKAGE_IDS,
     servideId: process.env.SERVICE_ID,
   };
 };

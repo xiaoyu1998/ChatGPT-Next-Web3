@@ -77,7 +77,7 @@ export function getHeaders() {
     headers.Authorization = makeBearer(
       ACCESS_CODE_PREFIX + accessStore.accessCode,
     );
-  } else if (accessStore.isWeb3Payment()) {
+  } else if (accessStore.enabledWeb3Payment()) {
     //web3Payment------xiaoyu1998
     const ethAddress = useAccessStore.getState().ethAddress;
     headers["ethAddress"] = ethAddress;

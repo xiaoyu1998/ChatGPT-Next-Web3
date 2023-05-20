@@ -51,9 +51,8 @@ export function auth(req: NextRequest) {
     serverConfig.needCode &&
     !serverConfig.codes.has(hashedCode) &&
     !token &&
-    !ethAddress
+    !ethAddress //web3Payment------xiaoyu1998
   ) {
-    //web3Payment------xiaoyu1998
     return {
       error: true,
       msg: !accessCode ? "empty access code" : "wrong access code",
