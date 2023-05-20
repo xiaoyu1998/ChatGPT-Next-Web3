@@ -34,7 +34,7 @@ export const getServerSideConfig = () => {
     );
   }
 
-  console.log(process.env);
+  // console.log(process.env);
 
   return {
     apiKey: process.env.OPENAI_API_KEY,

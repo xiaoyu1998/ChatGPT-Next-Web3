@@ -1,5 +1,5 @@
 import { Wallet, verifyMessage, getDefaultProvider, Contract } from "ethers";
-import { AIWAYS_ABI } from "./abis/aiways";
+import { AIWAYS_ABI } from "./abis";
 
 export const ONE_DAY = 24 * 60 * 60 * 1000;
 export const ONE_SECOND = 1 * 1000;
@@ -20,8 +20,11 @@ export function recoverAddress(message: string, signature: string) {
 }
 
 export async function checkExpiration(ethAddress: string, serviceId: string) {
-  const provider = getDefaultProvider(URL_ETH);
-  const aiways = new Contract(AIWAIYS, AIWAYS_ABI, provider);
+  const provider = getDefaultProvider(process.env.URL_ETH);
+  const aiways = new Contract(process.env.AIWAIYS, AIWAYS_ABI, provider);
+
+  console.log("serviceId", serviceId);
+  console.log("parseInt", parseInt(serviceId, 16));
   return await aiways.checkExpiration(ethAddress, parseInt(serviceId, 16));
 }
 
@@ -55,8 +58,8 @@ export async function getLatestPayments(
     }),
   };
 
-  const response = await fetch(URL_GRAPHQL, options).then((response) =>
-    response.json(),
+  const response = await fetch(process.env.URL_GRAPHQL, options).then(
+    (response) => response.json(),
   );
   return response.data.payments;
 }
