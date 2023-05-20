@@ -4,6 +4,16 @@ Before starting development, you must create a new `.env.local` file at project 
 
 ```
 OPENAI_API_KEY=<your api key here>
+ENABLE_WEB3_PAYMENT=1
+```
+
+and you need to enable web3 payment:
+```
+ENABLE_WEB3_PAYMENT=1
+SERVICE_ID=<your service id in aiways>
+PAYMENT_PACKAGE_IDS=<your package id for you service>
+URL_ETH=<ethereum endpoint url>
+AIWAIYS=<aiways contract address>
 ```
 
 ### Local Development
