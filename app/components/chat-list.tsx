@@ -1,5 +1,6 @@
 import DeleteIcon from "../icons/delete.svg";
 import BotIcon from "../icons/bot.svg";
+import EditIcon from "../icons/edit.svg";
 
 import styles from "./home.module.scss";
 import {
@@ -84,7 +85,7 @@ export function ChatItem(props: {
             className={styles["chat-item-edit"]}
             onClickCapture={props.onEdit}
           >
-            <DeleteIcon />
+            <EditIcon />
           </div>
           <div
             className={styles["chat-item-delete"]}
@@ -156,9 +157,7 @@ export function ChatList(props: { narrow?: boolean }) {
                   selectSession(i);
                 }}
                 onEdit={() => {
-                  if (!props.narrow || confirm(Locale.Home.DeleteChat)) {
-                    renameSession(item.topic);
-                  }
+                  renameSession(item.topic);
                 }}
                 onDelete={() => {
                   if (!props.narrow || confirm(Locale.Home.DeleteChat)) {
