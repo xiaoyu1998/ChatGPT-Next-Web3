@@ -61,6 +61,19 @@
       }
     }
   }
+
+  .sidebar-header-bar-web3 {
+    padding: 10px 14px;
+    background-color: var(--white);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: var(--card-shadow);
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    user-select: none;
+    border: 2px solid transparent;
+    position: relative;
+  }
 }
 
 .sidebar-drag {
@@ -336,6 +349,20 @@
   }
 }
 
+.sidebar-tail-web3 {
+  padding: 10px 14px;
+  background-color: var(--primary);
+  color: var(--white);
+  border-radius: 10px;
+  margin-bottom: 10px;
+  box-shadow: var(--card-shadow);
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  user-select: none;
+  border: 2px solid transparent;
+  position: relative;
+}
+
 .sidebar-tail {
   display: flex;
   justify-content: space-between;
@@ -347,7 +374,7 @@
 }
 
 .sidebar-action:not(:last-child) {
-  margin-right: 15px;
+  margin-right: 5px;
 }
 
 .chat {

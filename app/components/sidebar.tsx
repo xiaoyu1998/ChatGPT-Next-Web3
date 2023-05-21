@@ -128,19 +128,8 @@ export function SideBar(props: { className?: string }) {
         </div>
       </div>
 
-      <div className={styles["chat-item"]}>
-        <IconButton
-          icon={<AddIcon />}
-          text={Locale.Home.NewChat}
-          onClick={() => {
-            if (config.dontShowMaskSplashScreen) {
-              chatStore.newSession();
-              navigate(Path.Chat);
-            } else {
-              navigate(Path.NewChat);
-            }
-          }}
-        />
+      <div className={styles["sidebar-header-bar-web3"]}>
+        {Locale.Home.NewChat}
       </div>
 
       <div
@@ -155,10 +144,19 @@ export function SideBar(props: { className?: string }) {
       </div>
 
       <div className={styles["sidebar-tail"]}>
-        <div className={styles["chat-item"]}>
-          <Link to={Path.Settings}>
-            <IconButton icon={<SettingsIcon />} text={Locale.Home.Connect} />
-          </Link>
+        <div className={styles["sidebar-tail-web3"]}>{Locale.Home.Connect}</div>
+
+        <div className={styles["sidebar-actions"]}>
+          <div className={styles["sidebar-action"]}>
+            <Link to={Path.Settings}>
+              <IconButton icon={<SettingsIcon />} shadow />
+            </Link>
+          </div>
+          <div className={styles["sidebar-action"]}>
+            <a href={REPO_URL} target="_blank">
+              <IconButton icon={<GithubIcon />} shadow />
+            </a>
+          </div>
         </div>
       </div>
 
