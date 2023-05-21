@@ -21,6 +21,7 @@ import { useRef, useEffect } from "react";
 export function ChatItem(props: {
   onClick?: () => void;
   onDelete?: () => void;
+  onEdit?: () => void;
   title: string;
   count: number;
   time: string;
@@ -80,6 +81,12 @@ export function ChatItem(props: {
           )}
 
           <div
+            className={styles["chat-item-edit"]}
+            onClickCapture={props.onEdit}
+          >
+            <DeleteIcon />
+          </div>
+          <div
             className={styles["chat-item-delete"]}
             onClickCapture={props.onDelete}
           >
@@ -119,6 +126,13 @@ export function ChatList(props: { narrow?: boolean }) {
     moveSession(source.index, destination.index);
   };
 
+  const renameSession = (topic) => {
+    const newTopic = prompt(Locale.Chat.Rename, topic);
+    if (newTopic && newTopic !== topic) {
+      chatStore.updateCurrentSession((session) => (session.topic = newTopic!));
+    }
+  };
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="chat-list">
@@ -140,6 +154,11 @@ export function ChatList(props: { narrow?: boolean }) {
                 onClick={() => {
                   navigate(Path.Chat);
                   selectSession(i);
+                }}
+                onEdit={() => {
+                  if (!props.narrow || confirm(Locale.Home.DeleteChat)) {
+                    renameSession(item.topic);
+                  }
                 }}
                 onDelete={() => {
                   if (!props.narrow || confirm(Locale.Home.DeleteChat)) {
