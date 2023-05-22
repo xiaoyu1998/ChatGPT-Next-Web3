@@ -62,18 +62,38 @@
     }
   }
 
-  .sidebar-header-bar-web3 {
-    padding: 10px 14px;
+  .sidebar-header-bar-web3{
     background-color: var(--white);
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
     margin-bottom: 10px;
-    box-shadow: var(--card-shadow);
-    transition: background-color 0.3s ease;
+
     cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
     user-select: none;
-    border: 2px solid transparent;
-    position: relative;
+    outline: none;
+    border: none;
+    color: var(--black);
   }
+
+ .sidebar-header-bar-web3-icon {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+ .sidebar-header-bar-web3-text {
+    margin-left: 5px;
+    font-size: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
 }
 
 .sidebar-drag {
@@ -626,3 +646,4 @@
   height: 100%;
   width: 100%;
 }
+

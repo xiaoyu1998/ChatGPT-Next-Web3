@@ -6,7 +6,7 @@ import { IconButton } from "./button";
 import SettingsIcon from "../icons/settings.svg";
 import GithubIcon from "../icons/github.svg";
 import ChatGptIcon from "../icons/chatgpt.svg";
-import AddIcon from "../icons/add.svg";
+import AddIcon from "../icons/add-svgrepo-com.svg";
 import CloseIcon from "../icons/close.svg";
 import MaskIcon from "../icons/mask.svg";
 import PluginIcon from "../icons/plugin.svg";
@@ -129,7 +129,12 @@ export function SideBar(props: { className?: string }) {
       </div>
 
       <div className={styles["sidebar-header-bar-web3"]}>
-        {Locale.Home.NewChat}
+        <div className={styles["sidebar-header-bar-web3-icon"]}>
+          <AddIcon />
+        </div>
+        <div className={styles["sidebar-header-bar-web3-text"]}>
+          {Locale.Home.NewChat}
+        </div>
       </div>
 
       <div
