@@ -4,7 +4,6 @@ Before starting development, you must create a new `.env.local` file at project 
 
 ```
 OPENAI_API_KEY=<your api key here>
-ENABLE_WEB3_PAYMENT=1
 ```
 
 And you need to enable web3 payment service:

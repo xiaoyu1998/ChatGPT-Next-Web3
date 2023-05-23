@@ -67,7 +67,7 @@
     border-radius: 10px;
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 10px 14px;
     margin-bottom: 10px;
 
     cursor: pointer;
@@ -80,15 +80,15 @@
   }
 
  .sidebar-header-bar-web3-icon {
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
  .sidebar-header-bar-web3-text {
     margin-left: 5px;
-    font-size: 12px;
+    font-size: 18px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -206,7 +206,7 @@
 }
 
 .chat-item-title {
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bolder;
   display: block;
   width: 200px;
@@ -370,7 +370,7 @@
 }
 
 .sidebar-tail-web3 {
-  padding: 10px 14px;
+  padding: 10px 10px;
   background-color: var(--primary);
   color: var(--white);
   border-radius: 10px;
