@@ -6,8 +6,12 @@ import { useState, useEffect } from "react";
 
 import styles from "./home.module.scss";
 
+// import {ReactComponent as BotIcon} from "../icons/bot.svg";
+// import {ReactComponent as LoadingIcon} from "../icons/three-dots.svg";
+
 import BotIcon from "../icons/bot.svg";
 import LoadingIcon from "../icons/three-dots.svg";
+
 
 import { getCSSVar, useMobileScreen } from "../utils";
 
@@ -24,6 +28,16 @@ import {
 import { SideBar } from "./sidebar";
 import { useAppConfig } from "../store/config";
 
+//web3Payment------xiaoyu1998
+import { Web3ReactProvider } from '@web3-react/core'
+import { Web3OnboardProvider } from '@web3-onboard/react'
+import { SetupWeb3Context } from 'blockchain/web3Context'
+import { AppContextProvider } from 'components/AppContextProvider'
+import { readOnlyEnhanceProvider } from 'blockchain/readOnlyEnhancedProviderProxy'
+import { Web3OnBoardConnectorProvider } from 'features/web3OnBoard/web3OnBoardConnectorProvider'
+import { initWeb3OnBoard } from 'features/web3OnBoard/initWeb3OnBoard'
+import Web3 from 'web3'
+
 export function Loading(props: { noLogo?: boolean }) {
   return (
     <div className={styles["loading-content"] + " no-dark"}>
@@ -32,6 +46,7 @@ export function Loading(props: { noLogo?: boolean }) {
     </div>
   );
 }
+//web3Payment------xiaoyu1998
 
 const Settings = dynamic(async () => (await import("./settings")).Settings, {
   loading: () => <Loading noLogo />,
@@ -120,7 +135,6 @@ function Screen() {
       }
     >
       <SideBar className={isHome ? styles["sidebar-show"] : ""} />
-
       <div className={styles["window-content"]} id={SlotID.AppBody}>
         <Routes>
           <Route path={Path.Home} element={<Chat />} />
@@ -134,6 +148,12 @@ function Screen() {
   );
 }
 
+function getLibrary(provider: any, connector: AbstractConnector | undefined): Web3 {
+  const chainIdPromise = connector!.getChainId()
+  const readOnlyEnhancedProvider = readOnlyEnhanceProvider(provider, chainIdPromise)
+  return new Web3(readOnlyEnhancedProvider)
+}
+
 export function Home() {
   useSwitchTheme();
 
@@ -144,7 +164,17 @@ export function Home() {
   return (
     <ErrorBoundary>
       <Router>
-        <Screen />
+        <Web3ReactProvider {...{ getLibrary }}>
+          <AppContextProvider>
+            <SetupWeb3Context>
+              <Web3OnboardProvider web3Onboard={initWeb3OnBoard}>
+                <Web3OnBoardConnectorProvider>
+                    <Screen />
+                </Web3OnBoardConnectorProvider>
+              </Web3OnboardProvider>
+            </SetupWeb3Context>   
+          </AppContextProvider>       
+        </Web3ReactProvider>
       </Router>
     </ErrorBoundary>
   );

@@ -1,4 +1,11 @@
 /** @type {import('next').NextConfig} */
+import pkg  from '@next/mdx';
+const withMDX  = pkg({
+  extension: /\.(md|mdx)$/,
+  options: {
+    providerImportSource: '@mdx-js/react',
+  },
+})
 
 const nextConfig = {
   experimental: {
@@ -29,15 +36,39 @@ const nextConfig = {
       beforeFiles: ret,
     };
   },
-  webpack(config) {
+  webpack(config,{isServer}) {
+
+    config.module.rules.push({
+      test: /\.(eot|woff|woff2|ttf|png|jpg|gif)$/,
+      use: {
+        loader: 'url-loader',
+        options: {
+          limit: 100000,
+          name: '[name].[ext]',
+        },
+      },
+    });
+
     config.module.rules.push({
       test: /\.svg$/,
       use: ["@svgr/webpack"],
     });
+
+   config.resolve.modules.unshift('app/web3');
+
+
+    if (!isServer) {
+      config.resolve = {
+        ...config.resolve,
+        fallback: {
+          fs: false,
+        },
+      }
+    }
 
     return config;
   },
   output: "standalone",
 };
 
-export default nextConfig;
+export default withMDX(nextConfig);
