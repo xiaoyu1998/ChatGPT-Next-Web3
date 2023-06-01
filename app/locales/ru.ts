@@ -54,6 +54,7 @@ const ru: LocaleType = {
   },
   Home: {
     NewChat: "Новый чат",
+    Connect: "Connect",
     DeleteChat: "Вы действительно хотите удалить выбранный разговор?",
     DeleteToast: "Чат удален",
     Revert: "Отмена",

@@ -6,7 +6,7 @@ import Locale from "../../locales";
 import {
   EventStreamContentType,
   fetchEventSource,
-} from "@microsoft/fetch-event-source";
+} from "@fortaine/fetch-event-source";
 import { prettyObject } from "@/app/utils/format";
 
 export class ChatGPTApi implements LLMApi {

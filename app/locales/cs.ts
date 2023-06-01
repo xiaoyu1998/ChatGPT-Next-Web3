@@ -54,6 +54,7 @@ const cs: LocaleType = {
   },
   Home: {
     NewChat: "Nový chat",
+    Connect: "Connect",
     DeleteChat: "Potvrzujete smazání vybrané konverzace?",
     DeleteToast: "Chat smazán",
     Revert: "Zvrátit",

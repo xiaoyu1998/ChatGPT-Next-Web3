@@ -54,6 +54,7 @@ const tr: LocaleType = {
   },
   Home: {
     NewChat: "Yeni Sohbet",
+    Connect: "Connect",
     DeleteChat: "Seçili sohbeti silmeyi onaylıyor musunuz?",
     DeleteToast: "Sohbet Silindi",
     Revert: "Geri Al",

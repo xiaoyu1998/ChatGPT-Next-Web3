@@ -54,6 +54,7 @@ const es: LocaleType = {
   },
   Home: {
     NewChat: "Nuevo chat",
+    Connect: "Connect",
     DeleteChat: "¿Confirmar eliminación de la conversación seleccionada?",
     DeleteToast: "Chat Deleted",
     Revert: "Revert",
@@ -84,7 +85,7 @@ const es: LocaleType = {
         vi: "Tiếng Việt",
         ru: "Русский",
         cs: "Čeština",
-        ko: "한국어"
+        ko: "한국어",
       },
     },
     Avatar: "Avatar",

@@ -54,6 +54,7 @@ const fr: LocaleType = {
   },
   Home: {
     NewChat: "Nouvelle discussion",
+    Connect: "Connect",
     DeleteChat: "Confirmer la suppression de la conversation sélectionnée ?",
     DeleteToast: "Conversation supprimée",
     Revert: "Revenir en arrière",
@@ -85,7 +86,7 @@ const fr: LocaleType = {
         vi: "Vietnamese",
         ru: "Русский",
         cs: "Čeština",
-        ko: "한국어"
+        ko: "한국어",
       },
     },
 

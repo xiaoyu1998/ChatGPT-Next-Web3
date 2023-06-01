@@ -1,12 +1,4 @@
 /** @type {import('next').NextConfig} */
-import pkg  from '@next/mdx';
-const withMDX  = pkg({
-  extension: /\.(md|mdx)$/,
-  options: {
-    providerImportSource: '@mdx-js/react',
-  },
-})
-
 const nextConfig = {
   experimental: {
     appDir: true,
@@ -54,7 +46,7 @@ const nextConfig = {
       use: ["@svgr/webpack"],
     });
 
-   config.resolve.modules.unshift('app/web3');
+   config.resolve.modules.unshift('app');
 
 
     if (!isServer) {
@@ -71,4 +63,4 @@ const nextConfig = {
   output: "standalone",
 };
 
-export default withMDX(nextConfig);
+export default nextConfig;

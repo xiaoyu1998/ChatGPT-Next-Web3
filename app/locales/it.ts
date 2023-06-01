@@ -54,6 +54,7 @@ const it: LocaleType = {
   },
   Home: {
     NewChat: "Nuova Chat",
+    Connect: "Connect",
     DeleteChat: "Confermare la cancellazione della conversazione selezionata?",
     DeleteToast: "Chat Cancellata",
     Revert: "Revert",

@@ -15,10 +15,6 @@ import Locale from "../locales";
 
 import { useAppConfig, useChatStore } from "../store";
 
-//
-import  { ConnectButton } from 'features/web3OnBoard/connectButton'
-import { isAppContextAvailable } from 'components/AppContextProvider'
-
 import {
   MAX_SIDEBAR_WIDTH,
   MIN_SIDEBAR_WIDTH,
@@ -114,8 +110,6 @@ export function SideBar(props: { className?: string }) {
   const navigate = useNavigate();
   const config = useAppConfig();
 
-  const isAppContextAvailableL = isAppContextAvailable();
-
   useHotKey();
 
   return (
@@ -134,15 +128,16 @@ export function SideBar(props: { className?: string }) {
         </div>
       </div>
 
-      <div className={styles["sidebar-header-bar-web3"]}
-           onClick={() => {
-              if (config.dontShowMaskSplashScreen) {
-                chatStore.newSession();
-                navigate(Path.Chat);
-              } else {
-                navigate(Path.NewChat);
-              }
-            }}
+      <div
+        className={styles["sidebar-header-bar-web3"]}
+        onClick={() => {
+          if (config.dontShowMaskSplashScreen) {
+            chatStore.newSession();
+            navigate(Path.Chat);
+          } else {
+            navigate(Path.NewChat);
+          }
+        }}
       >
         <div className={styles["sidebar-header-bar-web3-icon"]}>
           <AddIcon />
@@ -164,9 +159,6 @@ export function SideBar(props: { className?: string }) {
       </div>
 
       <div className={styles["sidebar-tail"]}>
-        <div className={styles["sidebar-tail-web3"]}>
-          {isAppContextAvailableL && <ConnectButton />}
-        </div>
         <div className={styles["sidebar-actions"]}>
           <div className={styles["sidebar-action"]}>
             <Link to={Path.Settings}>
@@ -184,8 +176,7 @@ export function SideBar(props: { className?: string }) {
       <div
         className={styles["sidebar-drag"]}
         onMouseDown={(e) => onDragMouseDown(e as any)}
-      ></div> 
-
+      ></div>
     </div>
   );
 }

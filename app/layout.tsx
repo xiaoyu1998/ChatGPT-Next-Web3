@@ -4,6 +4,10 @@ import "./styles/markdown.scss";
 import "./styles/highlight.scss";
 import { getBuildConfig } from "./config/build";
 
+// import 'styles/global_web3.css';
+import "@rainbow-me/rainbowkit/styles.css";
+import { Providers } from "web3/providers";
+
 const buildConfig = getBuildConfig();
 
 export const metadata = {
@@ -36,7 +40,9 @@ export default function RootLayout({
         <link rel="manifest" href="/site.webmanifest"></link>
         <script src="/serviceWorkerRegister.js" defer></script>
       </head>
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

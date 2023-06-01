@@ -54,6 +54,7 @@ const jp: LocaleType = {
   },
   Home: {
     NewChat: "新しいチャット",
+    Connect: "Connect",
     DeleteChat: "選択したチャットを削除してもよろしいですか？",
     DeleteToast: "チャットが削除されました",
     Revert: "元に戻す",
@@ -84,7 +85,7 @@ const jp: LocaleType = {
         vi: "Tiếng Việt",
         ru: "Русский",
         cs: "Čeština",
-        ko: "한국어"
+        ko: "한국어",
       },
     },
     Avatar: "アバター",

@@ -60,6 +60,8 @@ import { MaskAvatar, MaskConfig } from "./mask";
 import { useMaskStore } from "../store/mask";
 import { useCommand } from "../command";
 
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+
 const Markdown = dynamic(async () => (await import("./markdown")).Markdown, {
   loading: () => <LoadingIcon />,
 });
@@ -631,10 +633,10 @@ export function Chat() {
   });
 
   return (
-    <div className={styles.chat} key={session.id}>
+    <div className={styles["chat"]} key={session.id}>
       <div className="window-header">
         <div className="window-header-title">
-          <div className={"window-action-button" + " " + styles.mobile}>
+          <div className={"window-action-button" + " " + styles["mobile"]}>
             <IconButton
               icon={<ReturnIcon />}
               bordered
@@ -643,20 +645,15 @@ export function Chat() {
             />
           </div>
         </div>
-        <div className="window-actions">
-          {!isMobileScreen && (
-            <div className="window-action-button">
-              <IconButton
-                icon={config.tightBorder ? <MinIcon /> : <MaxIcon />}
-                bordered
-                onClick={() => {
-                  config.update(
-                    (config) => (config.tightBorder = !config.tightBorder),
-                  );
-                }}
-              />
-            </div>
-          )}
+
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            padding: 12,
+          }}
+        >
+          <ConnectButton />
         </div>
 
         <PromptToast
