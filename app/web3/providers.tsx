@@ -15,8 +15,32 @@ import { configureChains, createConfig, WagmiConfig } from "wagmi";
 import { mainnet, polygon, optimism, arbitrum, goerli } from "wagmi/chains";
 import { publicProvider } from "wagmi/providers/public";
 
+const localNetwork: Chain = {
+  id: 12_345,
+  name: "LocalNetwork",
+  network: "localNetwork",
+  nativeCurrency: { name: "Ether", symbol: "ETH", decimals: 18 },
+  rpcUrls: {
+    default: { http: ["http://192.168.2.106:8545"] },
+    public: { http: ["http://192.168.2.106:8545"] },
+  },
+  // blockExplorers: {
+  //   etherscan: { name: 'Etherscan', url: 'https://rinkeby.etherscan.io' },
+  //   default: { name: 'Etherscan', url: 'https://rinkeby.etherscan.io' },
+  // },
+  contracts: {
+    multicall3: {
+      address: "0xbE21cE0Ab452035FE1c8Bc9B775A5FbB68d0820a",
+      blockCreated: 65,
+    },
+  },
+  iconUrl: "ethereum.png",
+  testnet: true,
+};
+
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
+    localNetwork,
     mainnet,
     polygon,
     optimism,
@@ -45,7 +69,7 @@ const connectors = connectorsForWallets([
     wallets: [
       argentWallet({ projectId, chains }),
       trustWallet({ projectId, chains }),
-      ledgerWallet({ projectId, chains }),
+      // ledgerWallet({ projectId, chains }),
     ],
   },
 ]);
@@ -62,7 +86,12 @@ export function Providers({ children }: { children: React.ReactNode }) {
   React.useEffect(() => setMounted(true), []);
   return (
     <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider chains={chains} appInfo={demoAppInfo}>
+      <RainbowKitProvider
+        chains={chains}
+        appInfo={demoAppInfo}
+        modalSize="compact"
+        showRecentTransactions={true}
+      >
         {mounted && children}
       </RainbowKitProvider>
     </WagmiConfig>

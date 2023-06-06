@@ -2,6 +2,8 @@ import { ACCESS_CODE_PREFIX } from "../constant";
 import { ModelConfig, ModelType, useAccessStore } from "../store";
 import { ChatGPTApi } from "./platforms/openai";
 
+import { useAccount } from "wagmi";
+
 export const ROLES = ["system", "user", "assistant"] as const;
 export type MessageRole = (typeof ROLES)[number];
 
@@ -79,9 +81,11 @@ export function getHeaders() {
     );
   } else if (accessStore.enabledWeb3Payment()) {
     //web3Payment------xiaoyu1998
-    // const ethAddress = useAccessStore.getState().ethAddress;
-    // headers["ethAddress"] = ethAddress;
-    headers["ethAddress"] = "0x6EbE8cA3f73B5851eE4827524153Eee08C2F4D75";
+    const ethAddress = accessStore.ethAddress;
+    if (ethAddress) {
+      headers["ethAddress"] = ethAddress;
+      // console.log("ethAddress: ", ethAddress);
+    }
   }
 
   return headers;

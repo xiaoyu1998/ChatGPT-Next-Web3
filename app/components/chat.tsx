@@ -22,6 +22,8 @@ import BottomIcon from "../icons/bottom.svg";
 import StopIcon from "../icons/pause.svg";
 import LeftIcon from "../icons/left.svg";
 
+import { useAccount } from "wagmi";
+
 import {
   ChatMessage,
   SubmitKey,
@@ -416,6 +418,8 @@ export function Chat() {
   const isMobileScreen = useMobileScreen();
   const navigate = useNavigate();
 
+  const { address } = useAccount();
+
   const onChatBodyScroll = (e: HTMLElement) => {
     const isTouchBottom = e.scrollTop + e.clientHeight >= e.scrollHeight - 100;
     setHitBottom(isTouchBottom);
@@ -479,6 +483,9 @@ export function Chat() {
 
   const doSubmit = (userInput: string) => {
     if (userInput.trim() === "") return;
+
+    accessStore.updateEthAddress(address);
+
     setIsLoading(true);
     chatStore.onUserInput(userInput).then(() => setIsLoading(false));
     localStorage.setItem(LAST_INPUT_KEY, userInput);
@@ -632,6 +639,8 @@ export function Chat() {
     },
   });
 
+  // const {address} =   useAccount();
+
   return (
     <div className={styles["chat"]} key={session.id}>
       <div className="window-header">
@@ -645,7 +654,6 @@ export function Chat() {
             />
           </div>
         </div>
-
         <div
           style={{
             display: "flex",

@@ -4,12 +4,8 @@ import md5 from "spark-md5";
 import { ACCESS_CODE_PREFIX } from "../constant";
 
 //web3Payment------xiaoyu1998
-// import {
-//   recoverAddress,
-//   checkExpiration,
-//   ONE_SECOND,
-// } from "../web3/utils/crypto";
-// const cacheCheckExpiration = new Map<string, [number, boolean]>();
+import { checkExpiration, ONE_SECOND } from "web3/crypto";
+const cacheCheckExpiration = new Map<string, [number, boolean]>();
 //web3Payment------xiaoyu1998
 
 function getIP(req: NextRequest) {
@@ -63,27 +59,29 @@ export async function auth(req: NextRequest) {
     };
   }
 
+  //ethAddress = "0x180c2c655f5c7D4Cc43076f26078Ef6E8678828D"
+
   ////web3Payment------xiaoyu1998
   if (ethAddress) {
-    // var Expired;
-    // const lastCheck = cacheCheckExpiration.get(ethAddress);
-    // const now = Date.now();
-    // // console.log("lastCheck", lastCheck);
-    // if (lastCheck == undefined || lastCheck[0] + ONE_SECOND > now) {
-    //   Expired = await checkExpiration(ethAddress, serverConfig.servideId);
-    //   console.log("[Auth] ethAddress: ", ethAddress, Expired);
-    //   if (!Expired) {
-    //     cacheCheckExpiration.set(ethAddress, [now, Expired]);
-    //   }
-    // } else {
-    //   Expired = lastCheck[1];
-    // }
-    // if (Expired) {
-    //   return {
-    //     error: true,
-    //     msg: "the web3 payment has been expired",
-    //   };
-    // }
+    var Expired;
+    const lastCheck = cacheCheckExpiration.get(ethAddress);
+    const now = Date.now();
+    // console.log("[Auth] got access ethAddress:", ethAddress);
+    if (lastCheck == undefined || lastCheck[0] + ONE_SECOND > now) {
+      Expired = await checkExpiration(ethAddress, serverConfig.servideId);
+      console.log("[Auth] ethAddress: ", ethAddress, Expired);
+      if (!Expired) {
+        cacheCheckExpiration.set(ethAddress, [now, Expired]);
+      }
+    } else {
+      Expired = lastCheck[1];
+    }
+    if (Expired) {
+      return {
+        error: true,
+        msg: "the web3 payment has been expired",
+      };
+    }
   }
   //web3Payment------xiaoyu1998
 

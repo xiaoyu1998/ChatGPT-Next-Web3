@@ -4,7 +4,6 @@ import "./styles/markdown.scss";
 import "./styles/highlight.scss";
 import { getBuildConfig } from "./config/build";
 
-// import 'styles/global_web3.css';
 import "@rainbow-me/rainbowkit/styles.css";
 import { Providers } from "web3/providers";
 

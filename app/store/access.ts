@@ -15,6 +15,7 @@ export interface AccessControlStore {
 
   //web3Payment------xiaoyu1998
   enabledWeb3Payment: boolean;
+  ethAddress: string;
 
   updateToken: (_: string) => void;
   updateCode: (_: string) => void;

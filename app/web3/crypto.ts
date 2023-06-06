@@ -1,4 +1,5 @@
-import { Wallet, verifyMessage, getDefaultProvider, Contract } from "ethers";
+// import { Wallet, verifyMessage, getDefaultProvider, Contract } from "ethers";
+import { Wallet, getDefaultProvider, Contract } from "ethers";
 import { AIWAYS_ABI } from "./abis";
 
 export const ONE_DAY = 24 * 60 * 60 * 1000;
@@ -15,16 +16,22 @@ export async function sign(message: string, privateKey: string) {
   return signature;
 }
 
-export function recoverAddress(message: string, signature: string) {
-  return verifyMessage(message, signature);
-}
+// export function recoverAddress(message: string, signature: string) {
+//   return verifyMessage(message, signature);
+// }
 
 export async function checkExpiration(ethAddress: string, serviceId: string) {
   const provider = getDefaultProvider(process.env.URL_ETH);
   const aiways = new Contract(process.env.AIWAIYS, AIWAYS_ABI, provider);
+  // console.log("aiways: ", aiways)
 
-  console.log("serviceId", serviceId);
-  console.log("parseInt", parseInt(serviceId, 16));
+  console.log("[Auth] eth url: ", process.env.URL_ETH);
+  console.log("[Auth] aiways address: ", process.env.AIWAIYS);
+
+  console.log("provider: ", await provider.getBlockNumber());
+
+  console.log("[Auth] serviceId: ", serviceId);
+  // console.log("parseInt", parseInt(serviceId, 16));
   return await aiways.checkExpiration(ethAddress, parseInt(serviceId, 16));
 }
 
