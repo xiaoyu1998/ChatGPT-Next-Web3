@@ -22,8 +22,6 @@ import BottomIcon from "../icons/bottom.svg";
 import StopIcon from "../icons/pause.svg";
 import LeftIcon from "../icons/left.svg";
 
-import { useAccount } from "wagmi";
-
 import {
   ChatMessage,
   SubmitKey,
@@ -62,7 +60,9 @@ import { MaskAvatar, MaskConfig } from "./mask";
 import { useMaskStore } from "../store/mask";
 import { useCommand } from "../command";
 
-import { ConnectButton } from "@rainbow-me/rainbowkit";
+// web3Payment------xiaoyu1998
+// import { ConnectButton } from "@rainbow-me/rainbowkit";
+// import { useAccount } from "wagmi";
 
 const Markdown = dynamic(async () => (await import("./markdown")).Markdown, {
   loading: () => <LoadingIcon />,
@@ -418,7 +418,8 @@ export function Chat() {
   const isMobileScreen = useMobileScreen();
   const navigate = useNavigate();
 
-  const { address } = useAccount();
+  // web3Payment------xiaoyu1998
+  // const { address } = useAccount();
 
   const onChatBodyScroll = (e: HTMLElement) => {
     const isTouchBottom = e.scrollTop + e.clientHeight >= e.scrollHeight - 100;
@@ -484,7 +485,7 @@ export function Chat() {
   const doSubmit = (userInput: string) => {
     if (userInput.trim() === "") return;
 
-    accessStore.updateEthAddress(address);
+    // accessStore.updateEthAddress(address);
 
     setIsLoading(true);
     chatStore.onUserInput(userInput).then(() => setIsLoading(false));
@@ -639,6 +640,7 @@ export function Chat() {
     },
   });
 
+  // web3Payment------xiaoyu1998
   // const {address} =   useAccount();
 
   return (
@@ -654,7 +656,7 @@ export function Chat() {
             />
           </div>
         </div>
-        <div
+        {/*        <div
           style={{
             display: "flex",
             justifyContent: "flex-end",
@@ -662,7 +664,7 @@ export function Chat() {
           }}
         >
           <ConnectButton />
-        </div>
+        </div>*/}
 
         <PromptToast
           showToast={!hitBottom}

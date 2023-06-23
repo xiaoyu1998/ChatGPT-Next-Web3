@@ -4,8 +4,9 @@ import "./styles/markdown.scss";
 import "./styles/highlight.scss";
 import { getBuildConfig } from "./config/build";
 
-import "@rainbow-me/rainbowkit/styles.css";
-import { Providers } from "web3/providers";
+// web3Payment------xiaoyu1998
+// import "@rainbow-me/rainbowkit/styles.css";
+// import { Providers } from "web3/providers";
 
 const buildConfig = getBuildConfig();
 
@@ -40,7 +41,8 @@ export default function RootLayout({
         <script src="/serviceWorkerRegister.js" defer></script>
       </head>
       <body>
-        <Providers>{children}</Providers>
+        {/*        <Providers>{children}</Providers>*/}
+        {children}
       </body>
     </html>
   );
