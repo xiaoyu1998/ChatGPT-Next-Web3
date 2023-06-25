@@ -408,32 +408,32 @@ export const useChatStore = create<ChatStore>()(
         // remove error messages if any
         const cleanMessages = session.messages.filter((msg) => !msg.isError);
 
-        // should summarize topic after chating more than 50 words
-        const SUMMARIZE_MIN_LEN = 50;
-        if (
-          session.topic === DEFAULT_TOPIC &&
-          countMessages(cleanMessages) >= SUMMARIZE_MIN_LEN
-        ) {
-          const topicMessages = cleanMessages.concat(
-            createMessage({
-              role: "user",
-              content: Locale.Store.Prompt.Topic,
-            }),
-          );
-          api.llm.chat({
-            messages: topicMessages,
-            config: {
-              model: "gpt-3.5-turbo",
-            },
-            onFinish(message) {
-              get().updateCurrentSession(
-                (session) =>
-                  (session.topic =
-                    message.length > 0 ? trimTopic(message) : DEFAULT_TOPIC),
-              );
-            },
-          });
-        }
+        // // should summarize topic after chating more than 50 words
+        // const SUMMARIZE_MIN_LEN = 50;
+        // if (
+        //   session.topic === DEFAULT_TOPIC &&
+        //   countMessages(cleanMessages) >= SUMMARIZE_MIN_LEN
+        // ) {
+        //   const topicMessages = cleanMessages.concat(
+        //     createMessage({
+        //       role: "user",
+        //       content: Locale.Store.Prompt.Topic,
+        //     }),
+        //   );
+        //   api.llm.chat({
+        //     messages: topicMessages,
+        //     config: {
+        //       model: "gpt-3.5-turbo",
+        //     },
+        //     onFinish(message) {
+        //       get().updateCurrentSession(
+        //         (session) =>
+        //           (session.topic =
+        //             message.length > 0 ? trimTopic(message) : DEFAULT_TOPIC),
+        //       );
+        //     },
+        //   });
+        // }
 
         const modelConfig = session.mask.modelConfig;
         let toBeSummarizedMsgs = cleanMessages.slice(
