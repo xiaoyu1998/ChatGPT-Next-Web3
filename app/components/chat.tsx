@@ -777,7 +777,7 @@ export function Chat() {
       </div>
 
       <div className={styles["chat-input-panel"]}>
-        <PromptHints prompts={promptHints} onPromptSelect={onPromptSelect} />
+        {/*        <PromptHints prompts={promptHints} onPromptSelect={onPromptSelect} />
 
         <ChatActions
           showPromptModal={() => setShowPromptModal(true)}
@@ -794,7 +794,7 @@ export function Chat() {
             setUserInput("/");
             onSearch("");
           }}
-        />
+        />*/}
         <div className={styles["chat-input-panel-inner"]}>
           <textarea
             ref={inputRef}
