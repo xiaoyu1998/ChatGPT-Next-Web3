@@ -656,21 +656,21 @@ export function Chat() {
               onClick={() => navigate(Path.Home)}
             />
           </div>
-
-          {showMaxIcon && (
-            <div className="window-action-button-right">
-              <IconButton
-                icon={config.tightBorder ? <MinIcon /> : <MaxIcon />}
-                bordered
-                onClick={() => {
-                  config.update(
-                    (config) => (config.tightBorder = !config.tightBorder),
-                  );
-                }}
-              />
-            </div>
-          )}
         </div>
+
+        {showMaxIcon && (
+          <div className="window-action-button">
+            <IconButton
+              icon={config.tightBorder ? <MinIcon /> : <MaxIcon />}
+              bordered
+              onClick={() => {
+                config.update(
+                  (config) => (config.tightBorder = !config.tightBorder),
+                );
+              }}
+            />
+          </div>
+        )}
         {/*        <div
           style={{
             display: "flex",

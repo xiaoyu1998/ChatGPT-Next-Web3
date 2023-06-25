@@ -37,5 +37,9 @@
 }
 
 .window-action-button-right {
-  margin-right: 0px;
+  /*margin-right: 0px;*/
+  display: "flex";
+  justifyContent: "flex-end";
+  padding: 12;
+
 }
