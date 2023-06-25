@@ -632,6 +632,7 @@ export function Chat() {
   const location = useLocation();
   const isChat = location.pathname === Path.Chat;
   const autoFocus = !isMobileScreen || isChat; // only focus in chat page
+  const showMaxIcon = !isMobileScreen;
 
   useCommand({
     fill: setUserInput,
@@ -655,6 +656,20 @@ export function Chat() {
               onClick={() => navigate(Path.Home)}
             />
           </div>
+
+          {showMaxIcon && (
+            <div className="window-action-button-right">
+              <IconButton
+                icon={config.tightBorder ? <MinIcon /> : <MaxIcon />}
+                bordered
+                onClick={() => {
+                  config.update(
+                    (config) => (config.tightBorder = !config.tightBorder),
+                  );
+                }}
+              />
+            </div>
+          )}
         </div>
         {/*        <div
           style={{
